@@ -1,0 +1,48 @@
+---
+title: 'DATA 612: Project 1 | Global Baseline Predictors and RMSE'
+author: "Amber Ferger"
+date: "6/3/2020"
+output: html_document
+---
+
+
+In this first assignment, we’ll attempt to predict ratings with very little information. We’ll first look at just raw averages across all (training dataset) users. We’ll then account for “bias” by normalizing across users and across items.  
+  
+You’ll be working with ratings in a user-item matrix, where each rating may be (1) assigned to a training dataset, (2) assigned to a test dataset, or (3) missing.
+
+
+### Load Libraries
+```{r, message=FALSE}
+
+library(tidyverse)
+
+```
+
+```{r}
+
+rawData <- data.frame(
+  read.csv('S:\\Corp\\CIS\\BI Support\\Amber_Ferger\\Training\\DS_MS\\DATA_612_Recommender_Systems\\project1_data\\ratings_small.csv'))
+
+# top 10 movies
+top10 <- rawData %>%
+  group_by(movieId) %>%
+  summarize(TOTAL_RATINGS = n()) %>%
+  arrange(desc(TOTAL_RATINGS)) %>%
+  mutate(RECORD_ID = as.numeric(rownames(.))) %>%
+  filter(RECORD_ID <= 10)
+
+# join top 10 movies to users
+dataSubset <- inner_join(rawData, top10, by=c('movieId'='movieId'))
+
+# final Samples
+sampledData <- dataSubset %>%
+  group_by(userId) %>%
+  summarize(MOVIE_COUNT = n()) %>%
+  filter(MOVIE_COUNT >= 6) %>%
+  group_by(MOVIE_COUNT) %>% 
+  sample_n(2)
+
+finalData <- inner_join(dataSubset, sampledData, by=c("userId" = "userId"))
+
+
+```
