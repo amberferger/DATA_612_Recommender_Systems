@@ -1,0 +1,30 @@
+---
+title: 'DATA 612: Research Discussion 1'
+author: "Amber Ferger"
+date: "6/9/2020"
+output: html_document
+---
+
+## Commercial Recommender - Amazon
+**Choose one commercial recommender and describe how you think it works (content-based, collaborative filtering, etc). Does the technique deliver a good experience or are the recommendations off-target?**
+
+We all know Amazon - the online retail giant that allows users to purchase anything they can think of with the click of a button. Amazon distinguishes itself from other retailers with its customer-centric model that relies heavily on data to make product recommendations. 
+
+The company's sales outline a highly successful marketing strategy -- In 2019, Amazon reported $\$87.4$ billion in revenue and in quarter 1 of 2020, they reported $\$75.5$ billion. Their success lies in the fact that users keep coming back. The average prime member spends $\$1400$ per year on Amazon purchases versus non-prime at $\$600$ ( [Statistica source](https://www.statista.com/statistics/304938/amazon-prime-and-non-prime-members-average-sales-spend/) ). What's even more impressive is their ad revenue -- Amazon boasts an average revenue of $15 per user from advertising. ( [Source](https://mondaynote.com/the-arpus-of-the-big-four-dwarf-everybody-else-e5b02a579ed3) )  
+  
+Amazon success is largely driven by their recommendation system. From searching for products to reading reviews, the user experience is seamless. Recommendations are provided to users that are accurate and tailored to indviduals' preferences and purchase history. From personal experience, I have found the recommendations to be quite helpful. I can't count the number of times I've gone to purchase something, looked at the "Other Users have purchased this item as well" section, and realized that I need to add an additional item to my cart. (Example - the other day I went to buy a printer and paper popped up in the recommended items, which saved me the aggravation of getting the printer while forgetting the paper.) The "Because you shopped for similar items" is a great section as well. It's a win-win situation -- Amazon makes money off of my purchases for things I never knew I "needed", and I fill my house with plenty of random things that make me happy. 
+  
+The only thing that can tend to skew the recommendations is when multiple people share an account. Since my whole family uses the login, I often see recommendations based on things other family members have purchased. These recommendations aren't relevant or helpful to me, but I'm sure they're helpful to my sister, mom, brother, or dad. 
+  
+All of this being said, my guess is that Amazon uses item-based collaborative filtering. In this type of recommendation system, the algorithm looks through past purchase history (or the currently browsed item) and identifies items that are similar in nature. The similarity can be based on product features related to the type of product (ex: hose), product domain (ex: garden), and product purpose (ex: hose nozzle). Amazon has a trove of data, so it can also look at what other items were purchased in conjunction with product, and rank results according to customer reviews. 
+
+
+ 
+## Attacks on Recommender Systems
+**Read the article below and consider how to handle attacks on recommender systems. Can you think of a similar example where a collective effort to alter the workings of content recommendations have been successful? How would you design a system to prevent this kind of abuse?**  
+
+Attacks on recommender systems can certainly alter the recommendations that are given, which can lead to huge financial implications for companies. Interestingly, product reviews on Amazon are a good example of this.  
+  
+I am the type of person that researches products extensively before buying them. I tend to rely a lot on customer reviews to determine if I should purchase a particular brand or model, so they can really impact my purchasing decisions. Occassionaly I'll see a product that has a high average rating, but polar opposite numeric values (a lot of five-star reviews and all the rest 1-star reviews). The five-star ratings are usually a result of bots or paid reviews from customers and the one-star reviews are usually from real, unpaid customers. Although most of the non-incentivized reviews are one-star, the large volume of bot & paid customer five-star reviews skew the average rating up and the product erroneously appears in search recommendations. This is deceiving and can cause individuals to waste their money on not-so-great products.  
+  
+It's important to be aware of this type of attack when designing a recommendation system. Some things that I can think of to prevent abuse like this are to (1) require that users authenticate their accounts before posting a review (ensures that there is actually a person behind the account), (2) require that the individual verify the purchase or viewing of the product (this is a little harder, but might be doable by looking at the user's account  history), (3) requiring a minimum character count for each review (eliminates generic, one-word reviews), and (4) requiring the user to state that they are being paid for the review (I have seen this currently done). If a review is identified as being an attack, it can be left out of the rating calculations.  
