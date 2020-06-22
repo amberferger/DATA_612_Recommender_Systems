@@ -1,0 +1,34 @@
+---
+title: 'DATA 612: Research Discussion 2'
+author: "Amber Ferger"
+date: "6/20/2020"
+output: html_document
+---
+
+## Music Recommendations at Scale with Spark 
+**For this discussion item, please watch the following talk and summarize what you found to be the most important or interesting points. The first half will cover some of the mathematical techniques covered in this unit's reading and the second half some of the data management challenges in an industrial-scale recommendation system.**  
+  
+http://www.youtube.com/watch?v=3LBgiFch4_g  
+  
+One of the biggest challenges with creating a recommender system is the sheer volume of data that needs to be processed. With over 4 million users and 500,000 artists, Spotify has a mammoth-sized databank of information to sift through. Though the talk given by Christopher Johnson was given back in 2014, the findings are even more relevant in today's data-driven world.   
+
+### The Problem
+Spotify needed a way to create recommendations for users in a faster and more efficient manner. At the time of the video, their current process was to use Hadoop to break the data into chunks, calculate the intermediate terms, and then aggregate afterwards to solve for the optimal user-vectors. The biggest drawback was that the process required reading and writing from disk at each iteration. 
+
+### Enter Spark
+The proposal for this I/O bottleneck was to utilize Spark, which loads the ratings matrix into memory and caches the data. This removes the need to keep reading and writing from disk at each iteration, ultimately saving a lot of computation time.   
+
+
+### The Techniques
+Johnson goes on to describe the original technique using Hadoop and 2 additional Spark-oriented processes. 
+
+* **Broadcast Everything using Hadoop**: Send a copy of all item information to each block, group the data into users, and solve for the optimal user vectors. The rating info was not cached, so it had to be reloaded at every iteration. 
+* **Full-gridify using Spark**: Split the user information into blocks and cache, pass only the relevant item vectors to each block, compute intermediate terms, shuffle the data so that all user information is in the same block, and then solve for the optimal user vectors. This was better than the Hadoop method because the information was cached and didn't need to be recomputed. However, inefficiencies lied in the fact that the data had to be shuffled to get user information grouped properly. 
+* **Half-gridify using Spark**: Group by user, send to blocks and cache, pass the relevant item vectors to each block, solve for the optimal user vectors. This was the best methodology in terms of speed and efficiency because information is cached and there's no shuffling. The biggest drawback is that the item vectors sent to each block could potentially be very large. 
+  
+### Comparison
+As expected, run time decreased drastically from 10 hours using the original Hadoop methodology, to 3.5 hours using the full-gridify search, and finally to 1.5 hours using the half-gridify search. With the massive amount of new information that Spotify likely receives on a daily basis, it's imperative that the recommendations be computed in as little amount of time as possible. 
+
+
+
+ 
