@@ -1,0 +1,37 @@
+---
+title: 'DATA 612: Research Discussion 3'
+author: "Amber Ferger"
+date: "6/25/2020"
+output: html_document
+---
+
+## Algorithmic Bias 
+**As more systems and sectors are driven by predictive analytics, there is increasing awareness of the possibility and pitfalls of algorithmic discrimination. In what ways do you think Recommender Systems reinforce human bias? Reflecting on the techniques we have covered, do you think recommender systems reinforce or help to prevent unethical targeting or customer segmentation?  Please provide one or more examples to support your arguments.**  
+  
+
+### The Problem
+Recommender systems rely on user information to make decisions about product recommendations. The information is acquired from user profiles, which may include inherent correlations between factors. These correlations can lead to unintentionally learned patterns that produce discriminatory product recommendations. 
+
+### Reinforcing Human Bias
+Recommender systems perpetuate human bias IF they are not carefully designed to account for it. This is due to the inherent nature of the algorithms - they look at user characteristics, identify correlations and similarities, and then recommend items that match the user profile. User bias only amplifies this -- if an individual tends to purchase and search for certain types of items, the recommended items will be similar in nature. 
+
+Some examples include: 
+
+* **Ad targeting** - Google provides results that are specifically targeted to its users. Some of these are expected -- as Evan Estola mentions in his talk, [Why Do Recommendation Systems Go Bad](https://www.youtube.com/watch?v=MqoRzNhrTnQ), if you search for boots one day and Google recommends a pair of boots for you the next, it's really not surprising. However, recommendations can go bad when correlations between things that perpetuate discrimination appear. One example of this is gender and salary. Women tend to be paid lower than men, so algorithms pick up on this and provide ad recommendations to females for lower-paying jobs. 
+
+* **Search results** - Search engines are sensitive to syntax and can often provide results that further confirm our biases. Estola mentions the example of searching "Obama birth", which provides Obamas birth place versus "Obana birth certificate fake", which provides articles supporting the false view. 
+
+* **Product recommendations** - Estola describes the example of rolling papers being recommended after a user purchases a kitchen scale. Although it may be true that some users tend to purchase these things together, these recommendations shouldn't be provided to the user. 
+
+### Accounting & Preventing Bias
+Estola gives some really great ways to prevent bias from seeping into recommendation systems. 
+
+* **Actively look for it**: The only way to know that discrimination is embedded within a system is to search for it. One of the ways that Estola suggests is to compare recommendations across customer profiles to ensure that they are evaluated in a similar manner. 
+* **Create interpretable models**: Complex models may yield more accurate recommendations, but they are often not explainable. This can lead to unintentional biases that are unknown prior to implementation. One fix is to create simpler models (ex: regressions) whose results can easily be interpreted. 
+* **Isolate features**: Another suggestion that Estola provided was to segregate the data and train separately so that no unexpected, discrinatory correlations appear. This involves training features separately and combining in an ensemble model. 
+
+### Conclusions
+The key takeaway from this is that recommendation systems have the *potential* to be discriminatory, but if we take the initiative to proactively search for, identify, and correct it, the bias can be managed and prevented. 
+
+
+ 
